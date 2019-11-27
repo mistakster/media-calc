@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         paddingTop: 30,
-        marginHorizontal: 25,
+        marginHorizontal: 30,
     },
     mainHeader:{
         fontFamily: 'Roboto',
@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
     },
     iconBlock:{
         flex: 2,
+        paddingTop: 5,
         alignSelf: 'stretch',
         alignItems: 'center',
     },
@@ -164,6 +165,7 @@ const styles = StyleSheet.create({
     textBlock:{
         flex: 5,
         alignSelf: 'stretch',
+        paddingRight: 10
     },
     textBlockHeader:{
         fontFamily: 'Roboto',
@@ -180,7 +182,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         lineHeight: 17,
         color:'#7198A8',
-        paddingRight: 5,
     }
 
     

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Platform, View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { PhoneIcon, AddressIcon } from '../components/Icons';
 
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         paddingTop: 30,
-        marginHorizontal: 25,
+        marginHorizontal: 30,
     },
     mainHeader:{
         fontFamily: 'Roboto',
