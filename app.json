@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Name of App",
-    "slug": "newapp",
+    "name": "mediac",
+    "slug": "mediac",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -11,7 +11,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/robot-prod.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",

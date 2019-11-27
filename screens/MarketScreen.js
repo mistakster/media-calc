@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Dimensions, TouchableWithoutFeedback, Image } from 'react-native';
-import { BagMoneyIcon, PigMoneyIcon, WalletMoneyIcon, HandMoneyIcon, NotNeedIcon, ProbablyNeedIcon, MaybeBuyIcon, SureNeedIcon } from '../components/Icons';
-import SvgUri from 'react-native-svg-uri';
+import { BagMoneyIcon, PigMoneyIcon, WalletMoneyIcon, HandMoneyIcon, NotNeedIcon, ProbablyNeedIcon, MaybeBuyIcon, SureNeedIcon, FirstPathIcon, SecondPathIcon, ThirdPathIcon } from '../components/Icons';
 import styled from 'styled-components'
 
 const StyledView = styled.View`
@@ -133,8 +132,8 @@ export default class HelpScreen extends React.Component {
                         <Text style={styles.mainInfoContainer}>С точки зрения вашего потребителя.</Text>
                     </View>
 
-                    <View style={{flex:1, justifyContent: 'center', alignItems: 'center', marginTop: 5}}> 
-                        <SvgUri width="300" height="85" source={require('../assets/images/path.svg')} />
+                    <View style={{marginLeft: 25, flex:1, justifyContent: 'center', alignItems: 'center', marginTop: 5}}> 
+                        <FirstPathIcon></FirstPathIcon>
                     </View>
 
                     <View style={{flex:1, alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap', marginBottom: 30}}>
@@ -167,8 +166,8 @@ export default class HelpScreen extends React.Component {
                         <Text style={styles.mainInfoContainer}>С точки зрения вашего потребителя.</Text>
                     </View>
 
-                    <View style={{flex:1, justifyContent: 'center', alignItems: 'center', marginTop: 5}}> 
-                        <SvgUri width="300" height="85" source={require('../assets/images/pathSecond.svg')} />
+                    <View style={{marginLeft: 25, flex:1, justifyContent: 'center', alignItems: 'center', marginTop: 5}}> 
+                        <SecondPathIcon></SecondPathIcon>
                     </View>
 
                     <View style={{flex:1, alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'row', flexWrap: 'wrap', marginBottom: 30}}>
@@ -204,8 +203,8 @@ export default class HelpScreen extends React.Component {
                                     <Text style={styles.mainInfoContainer}>Вам подходит {this.getResultHeader()}</Text>
                                 </View>
 
-                                <View style={{flex:1, justifyContent: 'center', alignItems: 'center', marginTop: 5}}> 
-                                    <SvgUri width="300" height="85" source={require('../assets/images/pathThird.svg')} />
+                                <View style={{marginLeft: 25, flex:1, justifyContent: 'center', alignItems: 'center', marginTop: 5}}> 
+                                    <ThirdPathIcon></ThirdPathIcon>
                                 </View>
                                 <View style={{marginTop: 15,marginBottom: 15}}>
                                     <Image
