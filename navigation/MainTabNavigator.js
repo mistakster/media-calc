@@ -1,18 +1,21 @@
 import React from 'react';
-import { Platform, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
 import MarketScreen from '../screens/MarketScreen';
 import CalculatorScreen from '../screens/CalculatorScreen.js';
 import HelpScreen from '../screens/HelpScreen';
-import { MainIcon, MarketIcon, HelpIcon, CalculatorIcon } from '../components/Icons';
-
+import MainIcon from '../components/Icons/MainIcon';
+import MarketIcon from '../components/Icons/MarketIcon';
+import HelpIcon from '../components/Icons/HelpIcon';
+import CalculatorIcon from '../components/Icons/CalculatorIcon';
+import Logo from '../assets/images/logo.png';
 
 const config = {
     defaultNavigationOptions: {
         headerStyle:{
-        backgroundColor: "#1BA9D7",
+            backgroundColor: "#1BA9D7",
         },
         headerLeft: null,
         headerRight: null,
@@ -23,11 +26,11 @@ const config = {
 
 function LogoTitle(props) {
     return (
-      <View style={{ flex: 1, alignItems: "center" }}><Image
-        source={require('../assets/images/logo.png')}
-        style={{width: 172.15,
-          height: 24}}
-      /></View>
+        <View style={{ flex: 1, alignItems: "center" }}>
+            <Image
+                source={Logo}
+                style={{width: 172.15, height: 24}}/>
+        </View>
     );
 }
 
