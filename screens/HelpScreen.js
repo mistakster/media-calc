@@ -8,6 +8,7 @@ import LessInfo from "../components/TextBlocks/LessInfo";
 import ColorizedCircle from "../components/TextBlocks/ColorizedCircle";
 import HelpForm from "../components/HelpForm";
 import ContactsBlock from "../components/ScreenElements/ContactsBlock";
+import B from "../components/TextBlocks/Bold";
 
 
 export default function HelpScreen(props) {
@@ -26,22 +27,22 @@ export default function HelpScreen(props) {
 
                 <LessInfo>Рекламный носитель ТВ</LessInfo>
 
-                <View>
+                <View >
                     <Text style={styles.textInfoContainer}>
                         <Text style={{ color: Colors.hightlightTextColor }}>
                         Параметры, которые необходимо внести:{"\n"}
                         </Text>
-                        <Text style={{ fontWeight: "500" }}>Tvr (в %)</Text> — телевизионный
+                        <B>Tvr (в %)</B> — телевизионный
                         рейтинг выбранного ТВ канала, усредненный,{"\n"}
-                        <Text style={{ fontWeight: "500" }}>
-                        Количество трансляций
-                        </Text>{" "}
+                        <B>
+                        Количество трансляций 
+                        </B>
                         рекламных роликов за рекламную кампанию,{"\n"}
-                        <Text style={{ fontWeight: "500" }}>Хронометраж (сек)</Text>{" "}
+                        <B>Хронометраж (сек) </B>
                         рекламного ролика,{"\n"}
-                        <Text style={{ fontWeight: "500" }}>Бюджет</Text> рекламной кампании
+                        <B>Бюджет </B>рекламной кампании
                         (за вычетом всех скидок),
-                        <Text style={{ fontWeight: "500" }}> BASE</Text> — население того
+                        <B> BASE</B> — население того
                         населенного пункта, где вещает ТВ канал.
                     </Text>
                 </View>
@@ -51,16 +52,13 @@ export default function HelpScreen(props) {
                         <Text style={{ color: Colors.hightlightTextColor }}>
                         Параметры, которые вы получите с помощью Медиакалькулятора:{"\n"}
                         </Text>
-                        <Text style={{ fontWeight: "500" }}>OTS</Text> — количество
+                        <B>OTS</B> — количество
                         контактов с рекламой,
-                        <Text style={{ fontWeight: "500" }}> CPT</Text> — стоимость тысячи
+                        <B> CPT</B> — стоимость тысячи
                         контактов с рекламой,
-                        <Text style={{ fontWeight: "500" }}> Reach (3+)</Text> — эффективный
-                        охват аудитории,
-                        <Text style={{ fontWeight: "500" }}>
-                        {" "}
-                        Погнозное количество
-                        </Text>{" "}
+                        <B> Reach (3+)</B> — эффективный
+                        охват аудитории, 
+                        <B> Погнозное количество </B>
                         обратившихся к вам клиентов.
                     </Text>
                 </View>
@@ -74,17 +72,15 @@ export default function HelpScreen(props) {
                         <Text style={{ color: Colors.hightlightTextColor }}>
                         Параметры, которые необходимо внести:{"\n"}
                         </Text>
-                        <Text style={{ fontWeight: "500" }}>AQH (в тыс. человек)</Text> —
+                        <B>AQH (в тыс. человек)</B> —
                         аудитория четверти часа, усреднённая,{"\n"}
-                        <Text style={{ fontWeight: "500" }}>
-                        Количество трансляций
-                        </Text>{" "}
+                        <B>Количество трансляций </B>
                         рекламных роликов за рекламную кампанию,{"\n"}
-                        <Text style={{ fontWeight: "500" }}>Хронометраж (сек)</Text>{" "}
+                        <B>Хронометраж (сек) </B>
                         рекламного ролика,{"\n"}
-                        <Text style={{ fontWeight: "500" }}>Бюджет</Text> рекламной кампании
+                        <B>Бюджет </B>рекламной кампании 
                         (за вычетом всех скидок).{"\n"}
-                        <Text style={{ fontWeight: "500" }}>BASE</Text> — население того
+                        <B>BASE</B> — население того
                         населенного пункта, где вещает ТВ канал.
                     </Text>
                 </View>
@@ -94,16 +90,13 @@ export default function HelpScreen(props) {
                         <Text style={{ color: Colors.hightlightTextColor }}>
                         Параметры, которые вы получите с помощью Медиакалькулятора:{"\n"}
                         </Text>
-                        <Text style={{ fontWeight: "500" }}>OTS</Text> — количество
+                        <B>OTS</B> — количество
                         контактов с рекламой,
-                        <Text style={{ fontWeight: "500" }}> CPT</Text> — стоимость тысячи
+                        <B> CPT</B> — стоимость тысячи
                         контактов с рекламой,
-                        <Text style={{ fontWeight: "500" }}> Reach (3+)</Text> — эффективный
+                        <B> Reach (3+)</B> — эффективный
                         охват аудитории,
-                        <Text style={{ fontWeight: "500" }}>
-                        {" "}
-                        Погнозное количество
-                        </Text>{" "}
+                        <B> Погнозное количество </B>
                         обратившихся к вам клиентов.
                     </Text>
                 </View>
@@ -118,13 +111,13 @@ export default function HelpScreen(props) {
                         <Text style={{ color: Colors.hightlightTextColor }}>
                         Параметры, которые необходимо внести:{"\n"}
                         </Text>
-                        <Text style={{ fontWeight: "500" }}>ASC</Text> — количество всех
+                        <B>ASC</B> — количество всех
                         сторон бигбордов в городе.
-                        <Text style={{ fontWeight: "500" }}> SYC</Text> — количество сторон
+                        <B> SYC</B> — количество сторон
                         бигбордов для вашей рекламной кампании.
-                        <Text style={{ fontWeight: "500" }}> BASE</Text> — население города.
-                        <Text style={{ fontWeight: "500" }}> Side</Text> — сторона А или В,
-                        <Text style={{ fontWeight: "500" }}> Бюджет</Text> рекламной
+                        <B> BASE</B> — население города.
+                        <B> Side</B> — сторона А или В,
+                        <B> Бюджет</B> рекламной
                         кампании за вычетом всех скидок.
                     </Text>
                 </View>
@@ -134,16 +127,13 @@ export default function HelpScreen(props) {
                         <Text style={{ color: Colors.hightlightTextColor }}>
                         Параметры, которые вы получите с помощью Медиакалькулятора:{"\n"}
                         </Text>
-                        <Text style={{ fontWeight: "500" }}>OTS</Text> — количество
+                        <B>OTS</B> — количество
                         контактов с рекламой,
-                        <Text style={{ fontWeight: "500" }}> CPT</Text> — стоимость тысячи
+                        <B> CPT</B> — стоимость тысячи
                         контактов с рекламой,
-                        <Text style={{ fontWeight: "500" }}> Reach (3+)</Text> — эффективный
+                        <B> Reach (3+)</B> — эффективный
                         охват аудитории,
-                        <Text style={{ fontWeight: "500" }}>
-                        {" "}
-                        Погнозное количество
-                        </Text>{" "}
+                        <B> Погнозное количество </B>
                         обратившихся к вам клиентов.
                     </Text>
                 </View>
@@ -157,40 +147,28 @@ export default function HelpScreen(props) {
                         <Text style={{ color: Colors.hightlightTextColor }}>
                         Параметры, по которым можно сравнить рекламную компанию:{"\n"}
                         </Text>
-                        <Text style={{ fontWeight: "500" }}>OTS</Text> традиционного
+                        <B>OTS </B>традиционного
                         рекламного носителя корректно
-                        <Text style={{ fontWeight: "500" }}>
-                        {" "}
-                        сравнить с количеством показов рекламы
-                        </Text>{" "}
+                        <B> сравнить с количеством показов рекламы </B>
                         за месяц на том или ином сайте, который рассматривается как
                         рекламный носитель.
-                        <Text style={{ fontWeight: "500" }}>
-                        {" "}
-                        Сравнить можно либо прогнозно либо постфактум (посткампейн).{" "}
-                        </Text>
+                        <B>Сравнить можно либо прогнозно либо постфактум (посткампейн). </B>
                     </Text>
                 </View>
 
                 <View>
                     <Text style={styles.textInfoContainer}>
-                        <Text style={{ fontWeight: "500" }}>CPT</Text> корректно
-                        <Text style={{ fontWeight: "500" }}> сравнить с CPM</Text> рекламы
-                        на сайте.
+                        <B>CPT </B>корректно
+                        <B> сравнить с CPM </B>рекламы на сайте.
                     </Text>
                 </View>
 
                 <View style={{ marginBottom: 30 }}>
                     <Text style={styles.textInfoContainer}>
-                        <Text style={{ fontWeight: "500" }}>
-                        Прогнозное количество клиентов
-                        </Text>{" "}
-                        корректно
-                        <Text style={{ fontWeight: "500" }}> сравнить с кликами</Text> по
-                        рекламе на выбранном сайте.{"\n"}
-                        <Text style={{ fontWeight: "500" }}>
-                        Сравнивать можно либо прогнозно либо постфактум (посткампейн).
-                        </Text>
+                        <B>Прогнозное количество клиентов </B>корректно
+                        <B> сравнить с кликами </B>
+                        по рекламе на выбранном сайте.{"\n"}
+                        <B> Сравнивать можно либо прогнозно либо постфактум (посткампейн). </B>
                     </Text>
                 </View>
 
@@ -199,7 +177,7 @@ export default function HelpScreen(props) {
                 <MainInfo>Обращение к нам ни к чему вас не обяжет, но вы сможете получше,
                     поточнее примериться к нашим возможностям</MainInfo>
 
-                <ContactsBlock></ContactsBlock>
+                <ContactsBlock />
 
                 <HelpForm />
                 

@@ -4,9 +4,25 @@ import MainHeader from "../components/TextBlocks/MainHeader";
 import MainInfo from "../components/TextBlocks/MainInfo";
 import LessInfo from "../components/TextBlocks/LessInfo";
 import InfoBox from "../components/InfoBox";
-
+import WhiteHelpIcon from "../components/Icons/WhiteHelpIcon";
+import WhiteCalculatorIcon from '../components/Icons/WhiteCalculatorIcon';
+import WhiteMarketIcon from '../components/Icons/WhiteMarketIcon';
 
 export default function HomeScreen(props) {
+    
+    const whiteCalculatorIcon = (
+        <WhiteCalculatorIcon />
+    );
+
+    const whiteMarketIcon = (
+        <WhiteMarketIcon />
+    );
+
+    const whiteHelpIcon = (
+        <WhiteHelpIcon />
+    );
+    
+    
     return (
         <View style={styles.container}>
         <ScrollView
@@ -22,9 +38,9 @@ export default function HomeScreen(props) {
                 необязательно звонить и заниматься рутинной работой, достаточно
                 воспользоваться нашим помощником рекламиста.</LessInfo>
 
-            <InfoBox dataElement='calculator'></InfoBox>
-            <InfoBox dataElement='media'></InfoBox>
-            <InfoBox dataElement='help'></InfoBox>
+            <InfoBox header='Медиакалькулятор' text='Сравнивает основную валюту рекламных носителей.' icon={whiteCalculatorIcon} />
+            <InfoBox header='Маркетолог' text='Помогает рекламисту подобрать подходящий стиль.' icon={whiteMarketIcon} />
+            <InfoBox header='Справка и термины' text='В справке находятся основные термины используемые нами.' icon={whiteHelpIcon} />
 
         </ScrollView>
         </View>

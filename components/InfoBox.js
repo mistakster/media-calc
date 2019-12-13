@@ -1,14 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import WhiteCalculatorIcon from '../components/Icons/WhiteCalculatorIcon';
-import WhiteHelpIcon from '../components/Icons/WhiteHelpIcon';
-import WhiteMarketIcon from '../components/Icons/WhiteMarketIcon';
-
-const data = {
-    calculator  : ['Медиакалькулятор', 'Сравнивает основную валюту рекламных носителей.', <WhiteCalculatorIcon />],
-    media: ['Маркетолог', 'Помогает рекламисту подобрать подходящий стиль.', <WhiteMarketIcon />],
-    help: ['Справка и термины', 'В справке находятся основные термины используемые нами.', <WhiteHelpIcon />]
-} 
 
 
 export default function InfoBox(props){
@@ -17,18 +8,15 @@ export default function InfoBox(props){
             <View style={styles.lessInfoBox}>
                 <View style={styles.iconBlock}>
                     <View style={styles.iconRectangle}>
-                        {data[props.dataElement][2]}
+                        {props.icon}
                     </View>
                 </View>
                 <View style={styles.textBlock}>
-                    <View>
-                        <Text style={styles.textBlockHeader}>{data[props.dataElement][0]}</Text>
-                    </View>
-                    <View>
+                        <Text style={styles.textBlockHeader}>{props.header}</Text>
                         <Text style={styles.textBlockInfo}>
-                        {data[props.dataElement][1]}
+                        {props.text}
                         </Text>
-                    </View>
+
                 </View>
             </View>
         </View>

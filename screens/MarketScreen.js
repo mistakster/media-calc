@@ -17,6 +17,7 @@ import MainInfo from '../components/TextBlocks/MainInfo';
 import MainHeader from '../components/TextBlocks/MainHeader';
 import LessInfo from '../components/TextBlocks/LessInfo';
 import InfoCircle from '../components/TextBlocks/InfoCircle';
+import B from "../components/TextBlocks/Bold";
 
 import Make from '../assets/images/make.jpg';
 import Compare from '../assets/images/compare.jpg';
@@ -61,7 +62,6 @@ export default function HelpScreen(props) {
     function getResultSource(){
         return resultMarketArray[selectedFirst][selectedSecond][3];
     }
-
     
     return (
         <View style={styles.container}>
@@ -77,7 +77,7 @@ export default function HelpScreen(props) {
                         сработает лучше.</MainInfo>
 
                 <LessInfo>
-                    <Text style={{fontWeight: '500'}}>Суть методики:</Text> Стиль рекламного сообщения зависит
+                    <B>Суть методики:</B> Стиль рекламного сообщения зависит
                         от того,
                         что называют клиентской лояльностью. Клиентская лояльность может быть высокой, умеренной,
                         низкой.
@@ -133,12 +133,11 @@ export default function HelpScreen(props) {
 
                 <View style={{marginLeft: 25, flex:1, justifyContent: 'center', alignItems: 'center', 
                 marginTop: 5}}> 
-                    <FirstPathIcon></FirstPathIcon>
+                    <FirstPathIcon />
                 </View>
 
                 <View style={{flex:1, alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'row',
                     flexWrap: 'wrap', marginBottom: 30}}>
-
                     <CardView width={width} height={height} number='0' selected={selectedFirst} 
                         handleClick={()=>{
                             setSelectedFirst(0); 
@@ -167,7 +166,6 @@ export default function HelpScreen(props) {
                         } text='ПО КАРМАНУ'>
                         <HandMoneyIcon />
                     </CardView>
-
                 </View>
 
                 <View
@@ -183,7 +181,7 @@ export default function HelpScreen(props) {
 
                 <View style={{marginLeft: 25, flex:1, justifyContent: 'center', alignItems: 'center', 
                 marginTop: 5}}> 
-                    <SecondPathIcon></SecondPathIcon>
+                    <SecondPathIcon />
                 </View>
 
                 <View style={{flex:1, alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'row', 
@@ -234,7 +232,7 @@ export default function HelpScreen(props) {
 
                             <View style={{marginLeft: 25, flex:1, justifyContent: 'center', 
                             alignItems: 'center', marginTop: 5}}> 
-                                <ThirdPathIcon></ThirdPathIcon>
+                                <ThirdPathIcon />
                             </View>
                             <View style={{marginTop: 15,marginBottom: 15}}>
                                 <Image
@@ -243,8 +241,8 @@ export default function HelpScreen(props) {
                                 />
                             </View>
                             <LessInfo>
-                                <Text style={{fontWeight: '500', marginBottom: 5}}>
-                                        {getResultInfo()}{"\n"}{"\n"}</Text> 
+                                <B style={{marginBottom: 5}}>
+                                        {getResultInfo()}{"\n"}{"\n"}</B> 
                                     {getResultText()}
                             </LessInfo>
                         </View>

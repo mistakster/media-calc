@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
 import PhoneIcon from '../Icons/PhoneIcon';
 import AddressIcon from '../Icons/AddressIcon';
+import B from "../TextBlocks/Bold";
 
 
 export default function ContactsBlock(props){
@@ -13,19 +14,18 @@ export default function ContactsBlock(props){
                 </View>
                 <View>
                     <Text style={styles.contactInfoContainer}>
-                        <Text style={{ fontWeight: "500" }}>Контакты {"\n"}</Text>
-                        <Text>
-                        Челябинск: +7(351) 218-85-45 {"\n"}Екатеринбург: +7(351) 218-85-45{" "}
-                        {"\n"}
-                        </Text>
+                        <B>Контакты</B>
                     </Text>
+                    <Text style={styles.contactInfoContainer}>
+                        Челябинск: +7(351) 218-85-45 
+                    </Text>
+                    <Text style={styles.contactInfoContainer}>
+                        Екатеринбург: +7(351) 218-85-45
+                    </Text> 
                 </View>
-
                 <View>
                     <Text style={styles.contactInfoContainer}>
-                        <Text style={{ fontWeight: "500", fontSize: 16 }}>
-                        sales@zaycev.net {"\n"}
-                        </Text>
+                        <B>sales@zaycev.net</B>
                     </Text>
                 </View>
 
@@ -35,10 +35,13 @@ export default function ContactsBlock(props){
 
                 <View>
                     <Text style={styles.contactInfoContainer}>
-                        <Text style={{ fontWeight: "500" }}>Адрес {"\n"}</Text>
-                            <Text>
-                            Челябинск, ул. Энтузиастов, 30,{"\n"}офис 215{"\n"}
-                            </Text>
+                        <B>Адрес</B>
+                    </Text>
+                    <Text style={styles.contactInfoContainer}>
+                        Челябинск, ул. Энтузиастов, 30,
+                    </Text>
+                    <Text style={styles.contactInfoContainer}>
+                        офис 215
                     </Text>
                 </View>
             </View>
@@ -50,7 +53,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: -15,
         marginTop: 25,
         marginBottom: 15
     },
