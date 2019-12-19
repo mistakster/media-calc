@@ -1,25 +1,27 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableWithoutFeedback} from "react-native";
 
 
 export default function InfoBox(props){
     return(
-        <View style={styles.mainInfoBox}>
-            <View style={styles.lessInfoBox}>
-                <View style={styles.iconBlock}>
-                    <View style={styles.iconRectangle}>
-                        {props.icon}
+        <TouchableWithoutFeedback onPress={()=>{ props.handlePress(); }}>
+            <View style={styles.mainInfoBox}>
+                <View style={styles.lessInfoBox}>
+                    <View style={styles.iconBlock}>
+                        <View style={styles.iconRectangle}>
+                            {props.icon}
+                        </View>
+                    </View>
+                    <View style={styles.textBlock}>
+                            <Text style={styles.textBlockHeader}>{props.header}</Text>
+                            <Text style={styles.textBlockInfo}>
+                            {props.text}
+                            </Text>
+
                     </View>
                 </View>
-                <View style={styles.textBlock}>
-                        <Text style={styles.textBlockHeader}>{props.header}</Text>
-                        <Text style={styles.textBlockInfo}>
-                        {props.text}
-                        </Text>
-
-                </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 }
 

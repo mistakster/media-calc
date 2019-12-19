@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 import Colors from "../constants/Colors";
@@ -11,7 +11,7 @@ import ContactsBlock from "../components/ScreenElements/ContactsBlock";
 import B from "../components/TextBlocks/Bold";
 
 
-export default function HelpScreen(props) {
+export default function HelpScreen() {
     
     return (
         <View style={styles.container}>

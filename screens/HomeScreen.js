@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import MainHeader from "../components/TextBlocks/MainHeader";
 import MainInfo from "../components/TextBlocks/MainInfo";
 import LessInfo from "../components/TextBlocks/LessInfo";
@@ -10,6 +10,8 @@ import WhiteMarketIcon from '../components/Icons/WhiteMarketIcon';
 
 export default function HomeScreen(props) {
     
+    const {navigate} = props.navigation; 
+
     const whiteCalculatorIcon = (
         <WhiteCalculatorIcon />
     );
@@ -38,9 +40,9 @@ export default function HomeScreen(props) {
                 необязательно звонить и заниматься рутинной работой, достаточно
                 воспользоваться нашим помощником рекламиста.</LessInfo>
 
-            <InfoBox header='Медиакалькулятор' text='Сравнивает основную валюту рекламных носителей.' icon={whiteCalculatorIcon} />
-            <InfoBox header='Маркетолог' text='Помогает рекламисту подобрать подходящий стиль.' icon={whiteMarketIcon} />
-            <InfoBox header='Справка и термины' text='В справке находятся основные термины используемые нами.' icon={whiteHelpIcon} />
+            <InfoBox handlePress={() => {navigate('Calculator');}} header='Медиакалькулятор' text='Сравнивает основную валюту рекламных носителей.' icon={whiteCalculatorIcon} />
+            <InfoBox handlePress={() => {navigate('Market');}} header='Маркетолог' text='Помогает рекламисту подобрать подходящий стиль.' icon={whiteMarketIcon} />
+            <InfoBox handlePress={() => {navigate('Help');}} header='Справка и термины' text='В справке находятся основные термины используемые нами.' icon={whiteHelpIcon} />
 
         </ScrollView>
         </View>

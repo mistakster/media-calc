@@ -24,7 +24,7 @@ const config = {
     }
 };
 
-function LogoTitle(props) {
+function LogoTitle() {
     return (
         <View style={{ flex: 1, alignItems: "center" }}>
             <Image

@@ -6,7 +6,7 @@ import AddressIcon from '../Icons/AddressIcon';
 import B from "../TextBlocks/Bold";
 
 
-export default function ContactsBlock(props){
+export default function ContactsBlock(){
     return(
             <View>
                 <View style={styles.centerIcon}>

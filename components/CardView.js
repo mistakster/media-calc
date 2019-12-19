@@ -5,9 +5,8 @@ import styled from 'styled-components'
 
 const StyledView = styled.View`
     background-color: white;
-    elevation:17;
+    elevation: 17;
     box-shadow: 0px 4px 80px rgba(49, 123, 177, 0.03);
-
 `;
 
 export default function CardView(props){

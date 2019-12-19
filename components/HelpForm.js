@@ -1,44 +1,46 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput,TouchableOpacity, ActivityIndicator } from "react-native";
+import { StyleSheet, Text, View,TouchableOpacity, ActivityIndicator } from "react-native";
 import Colors from "../constants/Colors";
+import TextField from "./TextField";
 
 
-export default function HelpForm(props){
-    const [mail, setMail] = useState("");
-    const [name, setName] = useState("");
-    const [message, setMessage] = useState("");
+export default function HelpForm(){
+
+    const [values, setValues] = useState({name: '', mail: '', message: ''});
+    const [errors, setErrors] = useState({name: false, mail: false, message: false});
+    
     const [complete, setComplete] = useState(false);
     const [fetching, setFetching] = useState(false);
 
-    const [mailFocused, setMailFocused] = useState(false);
-    const [mailError, setMailError] = useState(false);
-
-    const [nameFocused, setNameFocused] = useState(false);
-    const [nameError, setNameError] = useState(false);
-
-    const [messageFocused, setMessageFocused] = useState(false);
-    const [messageError, setMessageError] = useState(false);
+    function onChange(name, text){
+        setValues({...values, [name]: text});
+        setErrors({...errors, [name]: false})
+    }
 
     function validate() {
         if (fetching) return false;
-        setMailError(mail.length > 0 ? false : true);
-        setNameError(name.length > 0 ? false : true);
-        setMessageError(message.length > 0 ? false : true);
-        if (mail.length > 0 && name.length > 0 && message.length > 0) {
-        setFetching(true);
-        new Promise(function(resolve, reject) {
-            setTimeout(() => {
-            resolve(false);
-            }, 2000);
-        })
-            .then(res => {
-            setComplete(true);
-            setFetching(res);
-            setMail("");
-            setName("");
-            setMessage("");
+        if (values.mail.length > 0 && values.name.length > 0 && values.message.length > 0) {
+            setFetching(true);
+            new Promise(function(resolve) {
+                setTimeout(() => {
+                resolve(false);
+                }, 1000);
             })
-            .catch(err => console.log(err));
+                .then(res => {
+                    setComplete(true);
+                    setFetching(res);
+                        setValues({name: '', mail: '', message: ''});
+                })
+                .catch(err => console.log(err));
+        }
+        else{
+            setErrors(
+                {
+                    name: values.name.length > 0 ? false : 'Введите Имя',
+                    mail: values.mail.length > 0 ? false : 'Введите E-mail',
+                    message: values.message.length > 0 ? false : 'Введите сообщение',
+                }
+            );
         }
     }
 
@@ -49,87 +51,13 @@ export default function HelpForm(props){
                     <Text>Отправить сообщение {"\n"}</Text>
                 </Text>
             </View>
-            <View>
-                {mailError ? (
-                    <Text style={styles.errorText}>Введите E-mail</Text>
-                ) : null}
-                <TextInput
-                    onFocus={() => setMailFocused(true)}
-                    onBlur={() => setMailFocused(false)}
-                    style={[
-                        styles.inputBorder,
-                        {
-                            height: 40,
-                            borderColor: mailFocused
-                            ? "#33ADD6"
-                            : mailError
-                            ? Colors.hightlightTextColor
-                            : "#CCCCCC"
-                        }
-                    ]}
-                    placeholder="E-mail"
-                    onChangeText={input => {
-                    setMail(input);
-                    setMailError(false);
-                    }}
-                    value={mail}
-                />
-            </View>
-
-            <View>
-                {nameError ? <Text style={styles.errorText}>Введите Имя</Text> : null}
-                <TextInput
-                    onFocus={() => setNameFocused(true)}
-                    onBlur={() => setNameFocused(false)}
-                    style={[
-                        styles.inputBorder,
-                        {
-                            height: 40,
-                            borderColor: nameFocused
-                            ? "#33ADD6"
-                            : nameError
-                            ? Colors.hightlightTextColor
-                            : "#CCCCCC"
-                        }
-                    ]}
-                    placeholder="Имя"
-                    onChangeText={text => {
-                    setName(text);
-                    setNameError(false);
-                    }}
-                    value={name}
-                />
-            </View>
-
-            <View>
-                {messageError ? (
-                    <Text style={styles.errorText}>Введите сообщение</Text>
-                ) : null}
-                <TextInput
-                    onFocus={() => setMessageFocused(true)}
-                    onBlur={() => setMessageFocused(false)}
-                    multiline={true}
-                    numberOfLines={5}
-                    style={[
-                        styles.inputBorder,
-                        {
-                            paddingTop: 10,
-                            textAlignVertical: "top",
-                            borderColor: messageFocused
-                            ? "#33ADD6"
-                            : messageError
-                            ? Colors.hightlightTextColor
-                            : "#CCCCCC"
-                        }
-                    ]}
-                    placeholder="Сообщение"
-                    onChangeText={text => {
-                    setMessage(text);
-                    setMessageError(false);
-                    }}
-                    value={message}
-                />
-            </View>
+            <TextField values={values} errors={errors} name='mail' onChange={(text)=>onChange('mail', text)}
+                placeholder='E-mail'/>
+            <TextField values={values} errors={errors} name='name' onChange={(text)=>onChange('name', text)}
+                placeholder='Имя' />
+            <TextField values={values} errors={errors} name='message' multiline={true} numberOfLines={5}
+                customStyle={{height: 140, paddingTop: 10, textAlignVertical: "top"}}  
+                onChange={(text)=>onChange('message', text)} placeholder='Сообщение'/>
 
             <View>
                 <TouchableOpacity
@@ -160,27 +88,12 @@ export default function HelpForm(props){
             </View>
             ) : null}
 
-            <View>
-                <Text style={styles.contactInfoContainer}>
-                    {"\n"}
-                    {"\n"}
-                    {"\n"}
-                    {"\n"}
-                    {"\n"}
-                    {"\n"}
-                </Text>
-            </View>
+            <View style={{marginBottom: 70}} />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    inputBorder: {
-        borderRadius: 2,
-        borderWidth: 1,
-        paddingLeft: 10,
-        marginBottom: 10
-    },
     formLabelContainer: {
         position: "absolute",
         top: -25,
@@ -188,7 +101,6 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         fontWeight: "bold",
         fontSize: 16,
-
         lineHeight: 23,
         color: Colors.baseTextColor
     },
@@ -223,13 +135,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: "center",
         color: "#FFFFFF"
-    },
-    errorText: {
-        fontFamily: "Roboto",
-        fontStyle: "normal",
-        fontWeight: "normal",
-        fontSize: 16,
-        lineHeight: 23,
-        color: Colors.hightlightTextColor
     }
 });

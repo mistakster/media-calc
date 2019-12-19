@@ -37,7 +37,7 @@ const resultMarketArray = [
 ]
 
 
-export default function HelpScreen(props) {
+export default function HelpScreen() {
     
     const [selectedFirst, setSelectedFirst] = useState(null);
     const [selectedSecond, setSelectedSecond] = useState(null);
