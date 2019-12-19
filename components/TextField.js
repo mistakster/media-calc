@@ -20,7 +20,7 @@ export default function TextField(props){
         errors,
         name,
         onChange,
-        customStyle,
+        style,
         ...restProps
     } = props;
 
@@ -38,7 +38,7 @@ export default function TextField(props){
             style={[
                 styles.inputBorder,
                 {
-                    ...customStyle,
+                    ...style,
                     borderColor: getBorderColod(focused, error)
                 }
             ]}

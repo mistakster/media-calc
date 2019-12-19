@@ -1,27 +1,25 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import Colors from "../../constants/Colors";
+import styled from 'styled-components'
 
+const StyledText = styled.Text`
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 19;
+    line-height: 21;
+    text-align: center;
+    color: ${Colors.baseTextColor};
+    margin-bottom: 25;
+`;
 
 export default function MainInfo(props){
     return(
         <View>
-            <Text style={styles.mainInfoContainer}>
+            <StyledText style={{...props.style}}>
                 {props.children}
-            </Text>
+            </StyledText>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    mainInfoContainer: {
-        fontFamily: "Roboto",
-        fontStyle: "normal",
-        fontWeight: "normal",
-        fontSize: 18,
-        lineHeight: 21,
-        textAlign: "center",
-        color: Colors.baseTextColor,
-        marginBottom: 25
-    },
-});

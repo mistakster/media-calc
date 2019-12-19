@@ -51,12 +51,13 @@ export default function HelpForm(){
                     <Text>Отправить сообщение {"\n"}</Text>
                 </Text>
             </View>
+            
             <TextField values={values} errors={errors} name='mail' onChange={(text)=>onChange('mail', text)}
                 placeholder='E-mail'/>
             <TextField values={values} errors={errors} name='name' onChange={(text)=>onChange('name', text)}
                 placeholder='Имя' />
             <TextField values={values} errors={errors} name='message' multiline={true} numberOfLines={5}
-                customStyle={{height: 140, paddingTop: 10, textAlignVertical: "top"}}  
+                style={{height: 140, paddingTop: 10, textAlignVertical: "top"}}  
                 onChange={(text)=>onChange('message', text)} placeholder='Сообщение'/>
 
             <View>

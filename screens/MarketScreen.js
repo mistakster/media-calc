@@ -1,6 +1,5 @@
 import React, { useRef, useState} from 'react';
-import { View, Text, StyleSheet, ScrollView, Dimensions, Image } from 'react-native';
-import CardView from '../components/CardView';
+import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import Colors from "../constants/Colors";
 import BagMoneyIcon from '../components/Icons/BagMoneyIcon';
 import PigMoneyIcon from '../components/Icons/PigMoneyIcon';
@@ -12,17 +11,19 @@ import MaybeBuyIcon from '../components/Icons/MaybeBuyIcon';
 import SureNeedIcon from '../components/Icons/SureNeedIcon';
 import FirstPathIcon from '../components/Icons/FirstPathIcon';
 import SecondPathIcon from '../components/Icons/SecondPathIcon';
-import ThirdPathIcon from '../components/Icons/ThirdPathIcon';
 import MainInfo from '../components/TextBlocks/MainInfo';
 import MainHeader from '../components/TextBlocks/MainHeader';
 import LessInfo from '../components/TextBlocks/LessInfo';
-import InfoCircle from '../components/TextBlocks/InfoCircle';
 import B from "../components/TextBlocks/Bold";
 
 import Make from '../assets/images/make.jpg';
 import Compare from '../assets/images/compare.jpg';
 import Info from '../assets/images/info.jpg';
 import Pres from '../assets/images/pres.jpg';
+import MarketListElement from '../components/MarketListElement';
+import MarketStep from '../components/ScreenElements/MarketStep';
+import MarketResultBlock from '../components/ScreenElements/MarketResultBlock';
+
 
 const presStyle = ['Презентационный стиль', 'Презентационный стиль. Или его еще называют имиджевой рекламой. Лояльность потребителя к рекламируемому продукту очень низкая и цель рекламного сообщения — привлечь внимание к этому продукту.', 'Если потребитель воспринимает ваш продукт как «Дорого и не нужен», «Дорого и возможно нужен», «Дороговато и не нужен»', Pres];
 const makerStyle = ['Убеждающий стиль', 'Убеждающий стиль. Лояльность потребителя к рекламируемому продукту начинает расти, уже есть определенный интерес. Цель такого рекламного сообщения — показать преимущества вашего продукта, показать выгоды для потребителя.', 'Если потребитель воспринимает ваш продукт как «Дорого и подумываю купить", «Дорого и нужен», «Дороговато но возможно нужен», «Дороговато и подумываю купить», «Могу позволить но не нужен», «Могу позволить и возможно нужен», «По карману но не нужен».', Make];
@@ -36,6 +37,36 @@ const resultMarketArray = [
     [makerStyle, compareStyle, compareStyle, infoStyle]
 ]
 
+const marketStepsData = {
+    firstStep:{
+        icons: [
+            <BagMoneyIcon key='0'/>,
+            <PigMoneyIcon key='1' />,
+            <WalletMoneyIcon key='2' />,
+            <HandMoneyIcon key='3' />
+        ],
+        titles: [
+            'ДОРОГО',
+            'ДОРОГОВАТО',
+            'МОГУ ПОЗВОЛИТЬ',
+            'ПО КАРМАНУ',
+        ]
+    },
+    secondStep: {
+        icons: [
+            <NotNeedIcon key='0'/>,
+            <ProbablyNeedIcon key='1' />,
+            <MaybeBuyIcon key='2' />,
+            <SureNeedIcon key='3' />
+        ],
+        titles: [
+            'МОГУ ПОЗВОЛИТЬ, НО НЕ НУЖЕН',
+            'МОГУ ПОЗВОЛИТЬ И ВОЗМОЖНО НУЖЕН',
+            'МОГУ ПОЗВОЛИТЬ И ПОДУМЫВАЮ КУПИТЬ',
+            'МОГУ ПОЗВОЛИТЬ И НУЖЕН',
+        ]
+    }  
+};
 
 export default function HelpScreen() {
     
@@ -62,6 +93,24 @@ export default function HelpScreen() {
     function getResultSource(){
         return resultMarketArray[selectedFirst][selectedSecond][3];
     }
+
+    function onClickStepFirst(number){
+        setSelectedFirst(number); 
+        setTimeout(()=>scrollRef.current.scrollTo({x: 0, y: cardCoordinate, animated: true}), 100);
+    }  
+    
+    function onClickStepSecond(number){
+        setSelectedSecond(number); 
+        setTimeout(()=>scrollRef.current.scrollTo({x: 0, y: resultCoordinate, animated: true}), 100);
+    }
+
+    const firstPathIcon = (
+        <FirstPathIcon />
+    );
+
+    const secondPathIcon = (
+        <SecondPathIcon />
+    );
     
     return (
         <View style={styles.container}>
@@ -73,8 +122,9 @@ export default function HelpScreen() {
                 
                 <MainHeader>Электронный маркетолог</MainHeader>
 
-                <MainInfo>Выберите тот стиль рекламного сообщения, который
-                        сработает лучше.</MainInfo>
+                <MainInfo>
+                    Выберите тот стиль рекламного сообщения, который сработает лучше.
+                </MainInfo>
 
                 <LessInfo>
                     <B>Суть методики:</B> Стиль рекламного сообщения зависит
@@ -88,167 +138,55 @@ export default function HelpScreen() {
                         к вашему Продукту Потребителя.
                 </LessInfo>
 
-                <View>
-                    <Text style={[styles.mainHeader,{marginTop: 25}]}>Инструкция</Text>
-                </View>
+                <MainHeader style={{marginTop:20}}>Инструкция</MainHeader>
 
-                <View>
-                    <Text style={[styles.mainInfoContainer, {marginBottom: 10}]}>Три простых шага сделают Вашу
-                        рекламу эффективной</Text>
-                </View>
+                <MainInfo style={{marginBottom: 10}}>
+                    Три простых шага сделают Вашу
+                    рекламу эффективной
+                </MainInfo>
 
-                <View style={styles.circleAndTextContainer}>
-                    <InfoCircle>1</InfoCircle>
-                    <View style={styles.textColorContainer}>
-                        <Text style={styles.colorizedText}>Выберите «Насколько дорогой» ваш Продукт в глазах
-                            Потребителя.</Text>
-                        <Text style={styles.nearCircleText}>Важно оценить этот критерий именно с точки зрения
-                            Потребителя.</Text>
-                    </View>
-                </View>
+                <MarketListElement number='1' header='Выберите «Насколько дорогой» ваш Продукт в глазах Потребителя.' 
+                    text='Важно оценить этот критерий именно с точки зрения Потребителя.' />
 
-                <View style={styles.circleAndTextContainer}>
-                    <InfoCircle>2</InfoCircle>
-                    <View style={styles.textColorContainer}>
-                        <Text style={styles.colorizedText}>Выберите «Насколько нужен» ваш Продукт Потребителю.
-                        </Text>
-                        <Text style={styles.nearCircleText}>С его же точки зрения. Важно смотреть на ваш Продукт
-                            глазами Потребителя.</Text>
-                    </View>
-                </View>
+                <MarketListElement number='2' header='Выберите «Насколько нужен» ваш Продукт Потребителю.' 
+                    text='С его же точки зрения. Важно смотреть на ваш Продукт глазами Потребителя.' />
 
-                <View style={[styles.circleAndTextContainer, {marginBottom: 35}]}>
-                    <InfoCircle>3</InfoCircle>
-                    <View style={styles.textColorContainer}>
-                        <Text style={styles.colorizedText}>Получите рекомендации нашего электронного маркетолога.
-                        </Text>
-                        <Text style={styles.nearCircleText}>Он подскажет Вам необходимый стиль подачи рекламного 
-                        сообщения для Потребителей с выбранной лояльностью.</Text>
-                    </View>
-                </View>
+                <MarketListElement style={{marginBottom: 40}} number='3' header='Получите рекомендации нашего
+                    электронного маркетолога.' text='Он подскажет Вам необходимый стиль подачи рекламного сообщения 
+                    для Потребителей с выбранной лояльностью.' />
 
-                <MainHeader>Насколько дорогой ваш продукт?</MainHeader>
-
-                <MainInfo>С точки зрения вашего потребителя.</MainInfo>
-
-                <View style={{marginLeft: 25, flex:1, justifyContent: 'center', alignItems: 'center', 
-                marginTop: 5}}> 
-                    <FirstPathIcon />
-                </View>
-
-                <View style={{flex:1, alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'row',
-                    flexWrap: 'wrap', marginBottom: 30}}>
-                    <CardView width={width} height={height} number='0' selected={selectedFirst} 
-                        handleClick={()=>{
-                            setSelectedFirst(0); 
-                            scrollRef.current.scrollTo({x: 0, y: cardCoordinate, animated: true})}
-                        } text='ДОРОГО'>
-                        <BagMoneyIcon />
-                    </CardView>
-                    <CardView width={width} height={height} number='1' selected={selectedFirst} 
-                        handleClick={()=>{
-                            setSelectedFirst(1); 
-                            scrollRef.current.scrollTo({x: 0, y: cardCoordinate, animated: true})}
-                        } text='ДОРОГОВАТО'>
-                        <PigMoneyIcon />
-                    </CardView>
-                    <CardView width={width} height={height} number='2' selected={selectedFirst} 
-                        handleClick={()=>{
-                            setSelectedFirst(2); 
-                            scrollRef.current.scrollTo({x: 0, y: cardCoordinate, animated: true})}
-                        } text='МОГУ ПОЗВОЛИТЬ'>
-                        <WalletMoneyIcon />
-                    </CardView>
-                    <CardView width={width} height={height} number='3' selected={selectedFirst} 
-                        handleClick={()=>{
-                            setSelectedFirst(3); 
-                            scrollRef.current.scrollTo({x: 0, y: cardCoordinate, animated: true})}
-                        } text='ПО КАРМАНУ'>
-                        <HandMoneyIcon />
-                    </CardView>
-                </View>
+                <MarketStep header='Насколько дорогой ваш продукт?' info='С точки зрения вашего потребителя.'
+                    icon={firstPathIcon} width={width} height={height} data={marketStepsData.firstStep} 
+                    selected={selectedFirst} onClick={(number)=>onClickStepFirst(number)}/>
 
                 <View
                     onLayout={event => {
                         const layout = event.nativeEvent.layout;
                         setCardCoordinate(layout.y);
                     }}
-                >
-                    <Text style={styles.mainHeader}>Насколько нужен ваш продукт?</Text>
-                </View>
+                />
 
-                <MainInfo>С точки зрения вашего потребителя.</MainInfo>
+                { 
+                    (typeof selectedFirst == 'number') && 
+                    <MarketStep  header='Насколько нужен ваш продукт?' info='С точки зрения вашего потребителя.'
+                        icon={secondPathIcon} width={width} height={height} data={marketStepsData.secondStep}
+                        selected={selectedSecond} onClick={(number)=>onClickStepSecond(number)}/>
+                }
 
-                <View style={{marginLeft: 25, flex:1, justifyContent: 'center', alignItems: 'center', 
-                marginTop: 5}}> 
-                    <SecondPathIcon />
-                </View>
-
-                <View style={{flex:1, alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'row', 
-                flexWrap: 'wrap', marginBottom: 30}}>
-
-                    <CardView width={width} number='0' selected={selectedSecond} 
-                    handleClick={()=>{
-                        setSelectedSecond(0); 
-                        setTimeout(()=>scrollRef.current.scrollTo({x: 0, y: resultCoordinate, animated: true}), 100) }
-                        } height={height} text='МОГУ ПОЗВОЛИТЬ, НО НЕ НУЖЕН'>
-                        <NotNeedIcon />
-                    </CardView>
-                    <CardView width={width} number='1' selected={selectedSecond} 
-                        handleClick={()=>{
-                            setSelectedSecond(1); 
-                            setTimeout(()=>scrollRef.current.scrollTo({x: 0, y: resultCoordinate, animated: true}), 100) }
-                        } height={height} text='МОГУ ПОЗВОЛИТЬ И ВОЗМОЖНО НУЖЕН'>
-                        <ProbablyNeedIcon />
-                    </CardView>
-                    <CardView width={width} number='2' selected={selectedSecond} 
-                    handleClick={()=>{
-                        setSelectedSecond(2); 
-                        setTimeout(()=>scrollRef.current.scrollTo({x: 0, y: resultCoordinate, animated: true}), 100) }
-                        } height={height} text='МОГУ ПОЗВОЛИТЬ И ПОДУМЫВАЮ КУПИТЬ'>
-                        <MaybeBuyIcon />
-                    </CardView>
-                    <CardView width={width} number='3' selected={selectedSecond} 
-                    handleClick={()=>{
-                        setSelectedSecond(3); 
-                        setTimeout(()=>scrollRef.current.scrollTo({x: 0, y: resultCoordinate, animated: true}), 100) }
-                        } height={height} text='МОГУ ПОЗВОЛИТЬ И НУЖЕН'>
-                        <SureNeedIcon />
-                    </CardView>
-
-                </View>
                 <View 
                     onLayout={event => {
                         const layout = event.nativeEvent.layout;
                         setResultCoordinate(layout.y);
                     }}
-                    >
+                >
                     {
                         (selectedFirst !== null && selectedSecond !== null) ? 
-                        <View>
-                            <MainHeader>{getResultHeader()}</MainHeader>
-            
-                            <MainInfo>Вам подходит {getResultHeader()}</MainInfo>
-
-                            <View style={{marginLeft: 25, flex:1, justifyContent: 'center', 
-                            alignItems: 'center', marginTop: 5}}> 
-                                <ThirdPathIcon />
-                            </View>
-                            <View style={{marginTop: 15,marginBottom: 15}}>
-                                <Image
-                                    style={{width: 300, height: 200, borderRadius: 9}}
-                                    source={getResultSource()}
-                                />
-                            </View>
-                            <LessInfo>
-                                <B style={{marginBottom: 5}}>
-                                        {getResultInfo()}{"\n"}{"\n"}</B> 
-                                    {getResultText()}
-                            </LessInfo>
-                        </View>
-                        : <MainInfo>
-                            Здесь будет предложенный стиль. Выберите насколько «дорогой» и «нужный» продукт 
-                            потребителю
+                        <MarketResultBlock resultHeader={getResultHeader()} resultInfo={getResultInfo()}
+                            resultSource={getResultSource()} resultText={getResultText()} />
+                        : 
+                        <MainInfo>
+                            Здесь будет предложенный стиль. Выберите сперва насколько «дорогой», затем насколько 
+                            «нужный» продукт потребителю
                         </MainInfo>
                     }
                 </View>
@@ -259,12 +197,6 @@ export default function HelpScreen() {
 }
 
 const styles = StyleSheet.create({
-    inputBorder:{
-        borderRadius: 2,
-        borderWidth: 1,
-        paddingLeft: 10,
-        marginBottom:10,
-    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -272,63 +204,6 @@ const styles = StyleSheet.create({
     contentContainer: {
         paddingTop: 30,
         marginHorizontal: 30,
-    },
-    mainHeader:{
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: '500',
-        fontSize: 30,
-        lineHeight: 35,
-        textAlign: 'center',
-        color: Colors.baseTextColor,
-        marginBottom: 20,
-    },
-    mainInfoContainer:{
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        fontSize: 18,
-        lineHeight: 21,
-        textAlign: 'center',
-        color: Colors.baseTextColor,
-        marginBottom: 15,
-    },
-    lessInfoContainer:{
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        fontSize: 16,
-        lineHeight: 23,
-        color: Colors.lightBackground,
-        marginBottom: 15,
-    },
-    circleAndTextContainer:{
-        flex:1,
-        flexDirection: 'row',
-        marginBottom: 15,
-        marginTop: 10,
-    },
-    textColorContainer:{
-        paddingLeft: 10,
-        flex: 9,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    colorizedText:{
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        fontSize: 16,
-        lineHeight: 23,
-        color: Colors.mainThemeColor,
-    },
-    nearCircleText:{
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        fontSize: 13,
-        lineHeight: 17,
-        color: Colors.baseTextColor,
     },
 });
 

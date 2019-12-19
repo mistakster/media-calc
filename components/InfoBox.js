@@ -17,7 +17,6 @@ export default function InfoBox(props){
                             <Text style={styles.textBlockInfo}>
                             {props.text}
                             </Text>
-
                     </View>
                 </View>
             </View>
