@@ -4,7 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import HomeScreen from '../screens/HomeScreen';
 import MarketScreen from '../screens/MarketScreen';
-import CalculatorScreen from '../screens/CalculatorScreen.js';
+import CalculatorScreen from '../screens/CalculatorScreen';
 import HelpScreen from '../screens/HelpScreen';
 import MainIcon from '../components/Icons/MainIcon';
 import MarketIcon from '../components/Icons/MarketIcon';
@@ -12,99 +12,81 @@ import HelpIcon from '../components/Icons/HelpIcon';
 import CalculatorIcon from '../components/Icons/CalculatorIcon';
 import Logo from '../assets/images/logo.png';
 
-const config = {
+const headerTitle = (
+    <View style={{ flex: 1, alignItems: 'center' }}>
+        <Image
+            source={Logo}
+            style={{ width: 172.15, height: 24 }}
+        />
+    </View>
+);
+
+const defaultStackConfig = {
     defaultNavigationOptions: {
-        headerStyle:{
-            backgroundColor: "#1BA9D7",
+        headerStyle: {
+            backgroundColor: '#1BA9D7',
         },
         headerLeft: null,
         headerRight: null,
-        
-        headerTitle: () => <LogoTitle />,
+        headerTitle: headerTitle,
     }
 };
-
-function LogoTitle() {
-    return (
-        <View style={{ flex: 1, alignItems: "center" }}>
-            <Image
-                source={Logo}
-                style={{width: 172.15, height: 24}}/>
-        </View>
-    );
-}
 
 const HomeStack = createStackNavigator(
     {
         Home: HomeScreen,
     },
-    config
+    {
+        ...defaultStackConfig,
+        navigationOptions: {
+            tabBarLabel: 'Главная',
+            tabBarIcon: MainIcon
+        }
+    }
 );
-
-HomeStack.navigationOptions = {
-    tabBarLabel: 'Главная',
-    tabBarIcon: ({ focused }) => (
-        <MainIcon focused={focused}/>
-    ),
-};
-
-HomeStack.path = '';
 
 const MarketStack = createStackNavigator(
     {
         Market: MarketScreen,
     },
-    config
+    {
+        ...defaultStackConfig,
+        navigationOptions: {
+            tabBarLabel: 'Маркетолог',
+            tabBarIcon: MarketIcon
+        }
+    }
 );
-
-MarketStack.navigationOptions = {
-    tabBarLabel: 'Маркетолог',
-    tabBarIcon: ({ focused }) => (
-        <MarketIcon focused={focused}/>
-    ),
-};
-
-MarketStack.path = '';
 
 const CalculatorStack = createStackNavigator(
     {
         Calculator: CalculatorScreen,
     },
-    config
+    {
+        ...defaultStackConfig,
+        navigationOptions: {
+            tabBarLabel: 'Калькулятор',
+            tabBarIcon: CalculatorIcon
+        }
+    }
 );
-
-CalculatorStack.navigationOptions = {
-    tabBarLabel: 'Калькулятор',
-    tabBarIcon: ({ focused }) => (
-        <CalculatorIcon focused={focused}/>
-    ),
-};
-
-CalculatorStack.path = '';
 
 const HelpStack = createStackNavigator(
     {
         Help: HelpScreen,
     },
-    config
+    {
+        ...defaultStackConfig,
+        navigationOptions: {
+            tabBarLabel: 'Справка',
+            tabBarIcon: HelpIcon
+        }
+    }
 );
 
-HelpStack.navigationOptions = {
-    tabBarLabel: 'Справка',
-    tabBarIcon: ({ focused }) => (
-        <HelpIcon focused={focused}/>
-    ),
-};
-
-HelpStack.path = '';
-
-const tabNavigator = createBottomTabNavigator({
+export default createBottomTabNavigator({
     HomeStack,
     MarketStack,
     CalculatorStack,
     HelpStack,
 });
-
-tabNavigator.path = '';
-
-export default tabNavigator;
