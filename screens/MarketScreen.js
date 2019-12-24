@@ -1,6 +1,5 @@
-import React, { useRef, useState} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import Colors from "../constants/Colors";
 import BagMoneyIcon from '../components/Icons/BagMoneyIcon';
 import PigMoneyIcon from '../components/Icons/PigMoneyIcon';
 import WalletMoneyIcon from '../components/Icons/WalletMoneyIcon';
@@ -35,15 +34,15 @@ const resultMarketArray = [
     [presStyle, makerStyle, makerStyle, compareStyle],
     [makerStyle, makerStyle, compareStyle, compareStyle],
     [makerStyle, compareStyle, compareStyle, infoStyle]
-]
+];
 
 const marketStepsData = {
-    firstStep:{
+    firstStep: {
         icons: [
             <BagMoneyIcon key='0'/>,
-            <PigMoneyIcon key='1' />,
-            <WalletMoneyIcon key='2' />,
-            <HandMoneyIcon key='3' />
+            <PigMoneyIcon key='1'/>,
+            <WalletMoneyIcon key='2'/>,
+            <HandMoneyIcon key='3'/>
         ],
         titles: [
             'ДОРОГО',
@@ -55,9 +54,9 @@ const marketStepsData = {
     secondStep: {
         icons: [
             <NotNeedIcon key='0'/>,
-            <ProbablyNeedIcon key='1' />,
-            <MaybeBuyIcon key='2' />,
-            <SureNeedIcon key='3' />
+            <ProbablyNeedIcon key='1'/>,
+            <MaybeBuyIcon key='2'/>,
+            <SureNeedIcon key='3'/>
         ],
         titles: [
             'МОГУ ПОЗВОЛИТЬ, НО НЕ НУЖЕН',
@@ -65,61 +64,70 @@ const marketStepsData = {
             'МОГУ ПОЗВОЛИТЬ И ПОДУМЫВАЮ КУПИТЬ',
             'МОГУ ПОЗВОЛИТЬ И НУЖЕН',
         ]
-    }  
+    }
 };
 
+const firstPathIcon = (
+    <FirstPathIcon/>
+);
+
+const secondPathIcon = (
+    <SecondPathIcon/>
+);
+
 export default function HelpScreen() {
-    
     const [selectedFirst, setSelectedFirst] = useState(null);
     const [selectedSecond, setSelectedSecond] = useState(null);
     const [cardCoordinate, setCardCoordinate] = useState(0);
-    const [resultCoordinate, setResultCoordinate] = useState(0)
+    const [resultCoordinate, setResultCoordinate] = useState(0);
     const scrollRef = useRef(null);
-    const width = Dimensions.get('window').width; 
-    const height = Dimensions.get('window').height; 
-    
-    function getResultHeader(){
+    const width = Dimensions.get('window').width;
+    const height = Dimensions.get('window').height;
+
+    const isFirstSelected = typeof selectedFirst === 'number';
+    const isSecondSelected = typeof selectedSecond === 'number';
+
+    function getResultHeader() {
         return resultMarketArray[selectedFirst][selectedSecond][0];
     }
-    
-    function getResultText(){
+
+    function getResultText() {
         return resultMarketArray[selectedFirst][selectedSecond][1];
     }
 
-    function getResultInfo(){
+    function getResultInfo() {
         return resultMarketArray[selectedFirst][selectedSecond][2];
     }
 
-    function getResultSource(){
+    function getResultSource() {
         return resultMarketArray[selectedFirst][selectedSecond][3];
     }
 
-    function onClickStepFirst(number){
-        setSelectedFirst(number); 
-        setTimeout(()=>scrollRef.current.scrollTo({x: 0, y: cardCoordinate, animated: true}), 100);
-    }  
-    
-    function onClickStepSecond(number){
-        setSelectedSecond(number); 
-        setTimeout(()=>scrollRef.current.scrollTo({x: 0, y: resultCoordinate, animated: true}), 100);
-    }
+    useEffect(() => {
+        if (cardCoordinate > 0) {
+            scrollRef.current.scrollTo({
+                x: 0,
+                y: cardCoordinate,
+                animated: true
+            });
+        }
+    }, [selectedFirst, cardCoordinate, scrollRef]);
 
-    const firstPathIcon = (
-        <FirstPathIcon />
-    );
+    useEffect(() => {
+        scrollRef.current.scrollTo({
+            x: 0,
+            y: resultCoordinate,
+            animated: true
+        });
+    }, [selectedSecond, resultCoordinate, scrollRef]);
 
-    const secondPathIcon = (
-        <SecondPathIcon />
-    );
-    
     return (
         <View style={styles.container}>
             <ScrollView
                 ref={scrollRef}
                 style={styles.container}
                 contentContainerStyle={styles.contentContainer}>
-                
-                
+
                 <MainHeader>Электронный маркетолог</MainHeader>
 
                 <MainInfo>
@@ -128,70 +136,71 @@ export default function HelpScreen() {
 
                 <LessInfo>
                     <B>Суть методики:</B> Стиль рекламного сообщения зависит
-                        от того,
-                        что называют клиентской лояльностью. Клиентская лояльность может быть высокой, умеренной,
-                        низкой.
-                        Клиентская лояльность складывается из двух составляющих: «насколько этот Продукт дорогой»
-                        с точки зрения
-                        вашего Потребителя и «насколько этот Продукт нужен» ему. Клиентская лояльность —
-                        это отношение
-                        к вашему Продукту Потребителя.
+                    от того, что называют клиентской лояльностью. Клиентская лояльность может быть высокой, умеренной,
+                    низкой. Клиентская лояльность складывается из двух составляющих: «насколько этот Продукт дорогой»
+                    с точки зрения вашего Потребителя и «насколько этот Продукт нужен» ему. Клиентская лояльность —
+                    это отношение к вашему Продукту Потребителя.
                 </LessInfo>
 
-                <MainHeader style={{marginTop:20}}>Инструкция</MainHeader>
+                <MainHeader style={{ marginTop: 20 }}>Инструкция</MainHeader>
 
-                <MainInfo style={{marginBottom: 10}}>
+                <MainInfo style={{ marginBottom: 10 }}>
                     Три простых шага сделают Вашу
                     рекламу эффективной
                 </MainInfo>
 
-                <MarketListElement number='1' header='Выберите «Насколько дорогой» ваш Продукт в глазах Потребителя.' 
-                    text='Важно оценить этот критерий именно с точки зрения Потребителя.' />
+                <MarketListElement number='1' header='Выберите «Насколько дорогой» ваш Продукт в глазах Потребителя.'
+                    text='Важно оценить этот критерий именно с точки зрения Потребителя.'/>
 
-                <MarketListElement number='2' header='Выберите «Насколько нужен» ваш Продукт Потребителю.' 
-                    text='С его же точки зрения. Важно смотреть на ваш Продукт глазами Потребителя.' />
+                <MarketListElement number='2' header='Выберите «Насколько нужен» ваш Продукт Потребителю.'
+                    text='С его же точки зрения. Важно смотреть на ваш Продукт глазами Потребителя.'/>
 
-                <MarketListElement style={{marginBottom: 40}} number='3' header='Получите рекомендации нашего
-                    электронного маркетолога.' text='Он подскажет Вам необходимый стиль подачи рекламного сообщения 
-                    для Потребителей с выбранной лояльностью.' />
+                <MarketListElement style={{ marginBottom: 40 }} number='3' header='Получите рекомендации нашего
+                    электронного маркетолога.' text='Он подскажет Вам необходимый стиль подачи рекламного сообщения
+                    для Потребителей с выбранной лояльностью.'/>
 
-                <MarketStep header='Насколько дорогой ваш продукт?' info='С точки зрения вашего потребителя.'
-                    icon={firstPathIcon} width={width} height={height} data={marketStepsData.firstStep} 
-                    selected={selectedFirst} onClick={(number)=>onClickStepFirst(number)}/>
-
-                <View
-                    onLayout={event => {
-                        const layout = event.nativeEvent.layout;
-                        setCardCoordinate(layout.y);
-                    }}
+                <MarketStep
+                    header='Насколько дорогой ваш продукт?'
+                    info='С точки зрения вашего потребителя.'
+                    icon={firstPathIcon}
+                    width={width}
+                    height={height}
+                    data={marketStepsData.firstStep}
+                    selected={selectedFirst}
+                    onClick={setSelectedFirst}
                 />
 
-                { 
-                    (typeof selectedFirst == 'number') && 
-                    <MarketStep  header='Насколько нужен ваш продукт?' info='С точки зрения вашего потребителя.'
-                        icon={secondPathIcon} width={width} height={height} data={marketStepsData.secondStep}
-                        selected={selectedSecond} onClick={(number)=>onClickStepSecond(number)}/>
-                }
+                {isFirstSelected && (
+                    <MarketStep
+                        header='Насколько нужен ваш продукт?'
+                        info='С точки зрения вашего потребителя.'
+                        icon={secondPathIcon}
+                        width={width}
+                        height={height}
+                        data={marketStepsData.secondStep}
+                        selected={selectedSecond}
+                        onClick={setSelectedSecond}
+                        onChangePosition={setCardCoordinate}
+                    />
+                )}
 
-                <View 
-                    onLayout={event => {
-                        const layout = event.nativeEvent.layout;
-                        setResultCoordinate(layout.y);
-                    }}
-                >
-                    {
-                        (selectedFirst !== null && selectedSecond !== null) ? 
-                        <MarketResultBlock resultHeader={getResultHeader()} resultInfo={getResultInfo()}
-                            resultSource={getResultSource()} resultText={getResultText()} />
-                        : 
-                        <MainInfo>
-                            Здесь будет предложенный стиль. Выберите сперва насколько «дорогой», затем насколько 
-                            «нужный» продукт потребителю
-                        </MainInfo>
-                    }
-                </View>
+                {isFirstSelected && isSecondSelected && (
+                    <MarketResultBlock
+                        resultHeader={getResultHeader()}
+                        resultInfo={getResultInfo()}
+                        resultSource={getResultSource()}
+                        resultText={getResultText()}
+                        onChangePosition={setResultCoordinate}
+                    />
+                )}
+
+                {(!isFirstSelected || !isSecondSelected) && (
+                    <MainInfo>
+                        Здесь будет предложенный стиль. Выберите сперва насколько «дорогой», затем насколько
+                        «нужный» продукт потребителю
+                    </MainInfo>
+                )}
             </ScrollView>
-
         </View>
     );
 }

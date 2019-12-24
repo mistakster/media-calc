@@ -3,6 +3,7 @@ import CardView from '../CardView'
 import MainInfo from '../TextBlocks/MainInfo';
 import MainHeader from '../TextBlocks/MainHeader';
 import styled from 'styled-components'
+import { View } from "react-native";
 
 const IconView = styled.View`
 	margin-left: 25;
@@ -21,41 +22,46 @@ const CardsView = styled.View`
 	margin-bottom: 30;
 `;
 
-export default function MarketStep(props){
-	const {
-		header, 
-		icon,
-		info,
-		width,
-		height,
-		selected,
-		onClick,
-		data
-	} = props;
+export default function MarketStep(props) {
+    const {
+        header,
+        icon,
+        info,
+        width,
+        height,
+        selected,
+        onClick,
+        data,
+        onChangePosition
+    } = props;
 
-	return(
-		<>
-			<MainHeader>{header}</MainHeader>
+    return (
+        <View onLayout={e => onChangePosition && onChangePosition(e.nativeEvent.layout.y)}>
+            <MainHeader>{header}</MainHeader>
 
-			<MainInfo>{info}</MainInfo>
+            <MainInfo>{info}</MainInfo>
 
-			<IconView> 
-				{icon}
-			</IconView>
+            <IconView>
+                {icon}
+            </IconView>
 
-			<CardsView style={{flex:1, alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'row',
-				flexWrap: 'wrap', marginBottom: 30}}>
-				{data.icons.map(
-					(element, key)=>{
-						return(
-							<CardView key={key} width={width} height={height} number={key} selected={selected} 
-							handleClick={()=>onClick(key)} text={data.titles[key]}>
-							{element}
-							</CardView>
-						) 
-					}
-				)}
-			</CardsView>
-		</>
-	);
+            <CardsView style={{
+                flex: 1, alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'row',
+                flexWrap: 'wrap', marginBottom: 30
+            }}>
+                {data.icons.map((element, key) => (
+                    <CardView
+						key={key}
+						width={width}
+						height={height}
+						number={key}
+						selected={selected}
+                        handleClick={() => onClick(key)} text={data.titles[key]}
+					>
+                        {element}
+                    </CardView>
+                ))}
+            </CardsView>
+        </View>
+    );
 }

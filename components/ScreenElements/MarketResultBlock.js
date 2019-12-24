@@ -26,34 +26,31 @@ const StyledImage = styled.Image`
 	border-radius:9;
 `;
 
-export default function MarketResultBlock(props){
-	const {
-		resultHeader,
-		resultInfo,
-		resultSource,
-		resultText
-	} = props;
+export default function MarketResultBlock(props) {
+    const {
+        resultHeader,
+        resultInfo,
+        resultSource,
+        resultText,
+        onChangePosition
+    } = props;
 
-	return(
-		<View>
-			<MainHeader>{resultHeader}</MainHeader>
-
-			<MainInfo>Вам подходит {resultHeader}</MainInfo>
-
-			<IconView> 
-				<ThirdPathIcon />
-			</IconView>
-			<ImageView>
-				<StyledImage
-					source={resultSource}
-				/>
-			</ImageView>
-			<LessInfo>
-				<B>
-					{resultInfo}{"\n"}{"\n"}
-				</B> 
-					{resultText}
-			</LessInfo>
-		</View>
-	);
+    return (
+        <View onLayout={e => onChangePosition && onChangePosition(e.nativeEvent.layout.y)}>
+            <MainHeader>{resultHeader}</MainHeader>
+            <MainInfo>Вам подходит {resultHeader}</MainInfo>
+            <IconView>
+                <ThirdPathIcon/>
+            </IconView>
+            <ImageView>
+                <StyledImage source={resultSource}/>
+            </ImageView>
+            <LessInfo>
+                <B>
+                    {resultInfo}{"\n"}{"\n"}
+                </B>
+                {resultText}
+            </LessInfo>
+        </View>
+    );
 }
