@@ -75,6 +75,24 @@ const secondPathIcon = (
     <SecondPathIcon/>
 );
 
+/**
+ * Кастомный хук для прокрутки
+ * @param scrollRef ссылка на прокручиваемый элемент
+ * @param coordinate позиция по Y
+ * @param prevSelected предыдущий выбор нужен, чтобы форсировать прокрутку при сменен варианта
+ */
+function useScrollTo(scrollRef, coordinate, prevSelected) {
+    useEffect(() => {
+        if (coordinate > 0) {
+            scrollRef.current.scrollTo({
+                x: 0,
+                y: coordinate,
+                animated: true
+            });
+        }
+    }, [scrollRef, coordinate, prevSelected]);
+}
+
 export default function HelpScreen() {
     const [selectedFirst, setSelectedFirst] = useState(null);
     const [selectedSecond, setSelectedSecond] = useState(null);
@@ -103,23 +121,8 @@ export default function HelpScreen() {
         return resultMarketArray[selectedFirst][selectedSecond][3];
     }
 
-    useEffect(() => {
-        if (cardCoordinate > 0) {
-            scrollRef.current.scrollTo({
-                x: 0,
-                y: cardCoordinate,
-                animated: true
-            });
-        }
-    }, [selectedFirst, cardCoordinate, scrollRef]);
-
-    useEffect(() => {
-        scrollRef.current.scrollTo({
-            x: 0,
-            y: resultCoordinate,
-            animated: true
-        });
-    }, [selectedSecond, resultCoordinate, scrollRef]);
+    useScrollTo(scrollRef, cardCoordinate, selectedFirst);
+    useScrollTo(scrollRef, resultCoordinate, selectedSecond);
 
     return (
         <View style={styles.container}>
